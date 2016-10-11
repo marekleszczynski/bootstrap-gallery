@@ -1,23 +1,26 @@
 /*!
- * bootstrap-gallery v0.0.5 by @iekadou
- * Copyright (c) 2014 Jonas Braun
+ * bootstrap-gallery v0.0.10 by @iekadou
+ * Copyright (c) 2015-2016 Jonas Braun
  *
- * http://www.noxic-action.de/page/programming/bootstrap-gallery
+ * http://iekadou.com/programming/bootstrap-gallery/
  *
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
-#gallery-modal {
+
+@ie8hack: ~"\0/";
+
+.bs-gallery-modal-mixin() {
   button {
     font-size: 100px;
-    text-shadow: 0px 0px 5px #000;
+    text-shadow: 0 0 5px #000;
     opacity: 0.2;
     background: none;
     border: none;
     outline: none;
     color: #fff;
     position: absolute;
-    top: 0px;
+    top: 0;
 
     &:hover {
       opacity: 0.8;
@@ -34,18 +37,31 @@
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%); // IE9 only
     transform: translate(-50%, -50%);
+    top: 0@ie8hack;
+    left: 0@ie8hack;
 
     img {
       max-height: 100%;
       margin: auto;
-      display: inline-block;
+      display: block;
+      position: relative@ie8hack;
+      z-index: 1@ie8hack;
     }
+
     & > .btn-prev, & > .btn-next {
       z-index: 2;
       top: 50%;
       margin-top: -75px;
       height: 150px;
       width: 150px;
+    }
+
+    .caption {
+      position: relative;
+      top: -40px;
+      display: none;
+      background-color: rgba(255,255,255,0.75);
+      padding: 10px 20px;
     }
   }
 
@@ -62,7 +78,7 @@
   }
 
   .btn-close {
-    right: 0px;
+    right: 0;
     font-size: 50px;
     padding: 10px 10px 5% 5%;
     z-index: 3;
@@ -96,6 +112,11 @@
     margin-top: -50px;
     font-size: 100px;
     opacity: 0.8;
-    text-shadow: 0px 0px 5px #000;
+    text-shadow: 0 0 5px #000;
+    z-index: 0@ie8hack;
   }
+}
+
+#gallery-modal {
+  .bs-gallery-modal-mixin();
 }
